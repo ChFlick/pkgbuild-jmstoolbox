@@ -1,0 +1,45 @@
+# Maintainer: Christoph Flick <christophflick@gmx.de>
+pkgname=jmstoolbox
+pkgver=5.6.0
+pkgrel=1
+pkgdesc="JMSToolBox is an \"Universal\" JMS Client able to interact with the greatest number of Queue Managers/Queue providers on the market in a consistent manner."
+arch=('x86_64')
+url="https://github.com/jmstoolbox/jmstoolbox"
+license=('GPL3')
+depends=('java-runtime>=11' 'gtk3')
+makedepends=('maven' 'java-runtime>=11')
+install=
+changelog=
+source=("${pkgname}-${pkgver}.tar.gz"::"https://github.com/jmstoolbox/jmstoolbox/archive/v${pkgver}.tar.gz"
+        "${pkgname}.sh")
+sha256sums=('0f7d9f036af8dd3ea4b715617293d14b2246dbdf6d6af58650d0bd1971b94f03'
+            '453d9d88c562066f659301fd3b9f9f9ba93ba2aaa40b417a15cca9f5d1db7854')
+
+prepare() {
+	cd "${pkgname}-${pkgver}/org.titou10.jtb.build"
+    # Patch the pom with the correct jdk
+    sed -i 's,D:\\\dev_tools\\\jre11_64_openjdk,/usr/lib/jvm/java-11-openjdk,g' pom.xml
+}
+
+build() {
+	cd "${pkgname}-${pkgver}/org.titou10.jtb.build"
+	mvn clean verify
+}
+
+#check() {
+#	cd "$pkgname-$pkgver"
+#	make -k check
+#}
+
+package() {
+	cd "${pkgname}-${pkgver}/org.titou10.jtb.build/dist"
+    tar -xf "jmstoolbox-${pkgver}-linux.gtk.x86_64.tar.gz"
+
+    # Install everything into /usr/lib/jmstoolbox
+    install -m 755 -d "${pkgdir}/usr/lib"
+    cp -r "JMSToolBox" "${pkgdir}/usr/lib/${pkgname}"
+
+    cd "${pkgdir}/usr/lib/${pkgname}"
+    install -m 755 -d "${pkgdir}/usr/bin"
+    install -m 755 "${srcdir}/${pkgname}.sh" "${pkgdir}/usr/bin/${pkgname}"
+}
