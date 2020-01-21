@@ -1,0 +1,3 @@
+[submodule "jmstoolbox"]
+	path = jmstoolbox
+	url = ssh://aur@aur.archlinux.org/jmstoolbox.git
