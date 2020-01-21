@@ -27,11 +27,6 @@ build() {
 	mvn clean verify
 }
 
-#check() {
-#	cd "$pkgname-$pkgver"
-#	make -k check
-#}
-
 package() {
 	cd "${pkgname}-${pkgver}/org.titou10.jtb.build/dist"
     tar -xf "${pkgname}-${pkgver}-linux.gtk.x86_64.tar.gz"
