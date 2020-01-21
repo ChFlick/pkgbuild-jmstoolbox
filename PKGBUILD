@@ -7,7 +7,7 @@ arch=('x86_64')
 url="https://github.com/jmstoolbox/jmstoolbox"
 license=('GPL3')
 depends=('java-runtime>=11' 'gtk3')
-makedepends=('maven' 'java-runtime>=11')
+makedepends=('maven' 'java-environment>=11')
 install=
 changelog=
 source=("${pkgname}-${pkgver}.tar.gz"::"https://github.com/jmstoolbox/jmstoolbox/archive/v${pkgver}.tar.gz"
@@ -16,9 +16,10 @@ sha256sums=('0f7d9f036af8dd3ea4b715617293d14b2246dbdf6d6af58650d0bd1971b94f03'
             '453d9d88c562066f659301fd3b9f9f9ba93ba2aaa40b417a15cca9f5d1db7854')
 
 prepare() {
-	cd "${pkgname}-${pkgver}/org.titou10.jtb.build"
-    # Patch the pom with the correct jdk
-    sed -i 's,D:\\\dev_tools\\\jre11_64_openjdk,/usr/lib/jvm/java-11-openjdk,g' pom.xml
+	cd "${pkgname}-${pkgver}"
+    # Remove JRE inclusion as it is only needed for the windows build
+    sed -i '17d' org.titou10.jtb.build/pom.xml
+    sed -i '104d' org.titou10.jtb.product/pom.xml
 }
 
 build() {
