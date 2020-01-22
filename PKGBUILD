@@ -9,8 +9,6 @@ url="https://github.com/${pkgname}/${pkgname}"
 license=('GPL3')
 depends=('java-runtime>=11' 'gtk3')
 makedepends=('maven' 'java-environment>=11')
-install=
-changelog=
 source=("${pkgname}-${pkgver}.tar.gz"::"https://github.com/${pkgname}/${pkgname}/archive/v${pkgver}.tar.gz"
         "${pkgname}.sh"
         "${pkgname}.desktop")
