@@ -2,7 +2,8 @@
 pkgname=jmstoolbox
 pkgver=5.6.0
 pkgrel=1
-pkgdesc="A \"Universal\" JMS Client able to interact with the greatest number of Queue Managers/Queue providers on the market in a consistent manner."
+pkgdesc="A \"Universal\" JMS Client able to interact with a lot of \
+     Queue Managers/Providers on the market in a consistent manner."
 arch=('x86_64')
 url="https://github.com/${pkgname}/${pkgname}"
 license=('GPL3')
