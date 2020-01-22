@@ -13,7 +13,7 @@ source=("${pkgname}-${pkgver}.tar.gz"::"https://github.com/${pkgname}/${pkgname}
         "${pkgname}.sh"
         "${pkgname}.desktop")
 sha256sums=('0f7d9f036af8dd3ea4b715617293d14b2246dbdf6d6af58650d0bd1971b94f03'
-            '453d9d88c562066f659301fd3b9f9f9ba93ba2aaa40b417a15cca9f5d1db7854'
+            'adf3cdcc56f9c58c960bc753dcf887969d701edcfd2087bf7584255046ca5f47'
             '59b5fe00935cfc109b9832475de40a631088c7d92217ac9bc0cafb6b090984e9')
 
 prepare() {
@@ -38,12 +38,12 @@ package() {
 	cd "org.titou10.jtb.build/dist"
     tar -xf "${pkgname}-${pkgver}-linux.gtk.x86_64.tar.gz"
 
-    # Install app into /usr/lib/${pkgname}
-    install -m 755 -d "${pkgdir}/usr/lib"
-    cp -r "JMSToolBox" "${pkgdir}/usr/lib/${pkgname}"
+    # Install app into /usr/share/${pkgname}
+    install -m 755 -d "${pkgdir}/usr/share"
+    cp -r "JMSToolBox" "${pkgdir}/usr/share/${pkgname}"
 
     # Install executable into /usr/bin
-    cd "${pkgdir}/usr/lib/${pkgname}"
+    cd "${pkgdir}/usr/share/${pkgname}"
     install -m 755 -d "${pkgdir}/usr/bin"
     install -m 755 "${srcdir}/${pkgname}.sh" "${pkgdir}/usr/bin/${pkgname}"
 

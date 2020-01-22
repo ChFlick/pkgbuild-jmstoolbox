@@ -1,2 +1,2 @@
 #!/bin/sh
-/usr/lib/jmstoolbox/JMSToolBox
+/usr/share/jmstoolbox/JMSToolBox
